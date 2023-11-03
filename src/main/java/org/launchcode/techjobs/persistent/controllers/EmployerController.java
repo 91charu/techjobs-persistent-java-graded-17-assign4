@@ -51,9 +51,20 @@ public class EmployerController {
         }
 
     }
-    @RequestMapping("/")
+@GetMapping("/")
     public String index(Model model) {
         model.addAttribute("employers", employerRepository.findAll());
         return "employers/index";
     }
+//@GetMapping("/")
+//public String index(Model model) {
+//    // Retrieve the list of employers from the repository
+//    Iterable<Employer> employers = employerRepository.findAll();
+//
+//    // Add the list of employers to the model
+//    model.addAttribute("employers", employers);
+//
+//    // Return the view name (Thymeleaf template) to render
+//    return "employers/index";
+//}
 }
