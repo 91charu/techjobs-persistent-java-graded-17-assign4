@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.launchcode.techjobs.persistent.models.Employer;
 import org.launchcode.techjobs.persistent.models.Job;
 import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
+import org.launchcode.techjobs.persistent.models.data.JobRepository;
 import org.launchcode.techjobs.persistent.models.data.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,8 @@ import java.util.Optional;
  */
 @Controller
 public class HomeController {
-
+@Autowired
+private JobRepository jobRepository;
     @Autowired
     private EmployerRepository employerRepository;
 
@@ -57,12 +59,13 @@ Optional<Employer> employerOptional= employerRepository.findById(employerId);
         if(employerOptional.isPresent()) {
             Employer selectedEmployer = employerOptional.get();
             newJob.setEmployer(selectedEmployer);
+            jobRepository.save(newJob);
         }
         else{
             model.addAttribute("errors", "Selected employer not found. Please choose a avalid employer");
             return "add";
         }
-        return "redirect:";
+        return "redirect:add";
     }
 
     @GetMapping("view/{jobId}")
