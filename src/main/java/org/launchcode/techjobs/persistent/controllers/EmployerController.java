@@ -43,7 +43,7 @@ public class EmployerController {
 
         Optional<Employer> optEmployer = employerRepository.findById(employerId);
         if (optEmployer.isPresent()) {
-            Employer employer = (Employer) optEmployer.get();
+            Employer employer = optEmployer.get();
             model.addAttribute("employer", employer);
             return "employers/view";
         } else {

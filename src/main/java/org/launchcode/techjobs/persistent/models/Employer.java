@@ -1,5 +1,6 @@
 package org.launchcode.techjobs.persistent.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
@@ -17,9 +18,9 @@ public class Employer extends AbstractEntity {
     @Size(max = 255, message = "Location cannot exceed 255 characters")
     private String location;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name= "employer_id")
-    private List<Job> jobs=new ArrayList<>();
+    private final List<Job> jobs=new ArrayList<>();
     public Employer(String location) {
         this.location = location;
     }
@@ -32,5 +33,9 @@ public class Employer extends AbstractEntity {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public List<Job> getJobs() {
+        return jobs;
     }
 }

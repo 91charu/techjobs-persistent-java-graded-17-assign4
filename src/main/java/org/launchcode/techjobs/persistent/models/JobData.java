@@ -34,11 +34,19 @@ public class JobData {
             return results;
         }
         for (Job job : allJobs) {
+            if (column.equals("skills")) {
+                for (Skill skill : job.getSkills()) {
+                    if (skill.getName().toLowerCase().contains(value.toLowerCase())) {
+                        results.add(job);
+                    }
+                }
+            } else {
 
-            String aValue = getFieldValue(job, column);
+                String aValue = getFieldValue(job, column);
 
-            if (aValue != null && aValue.toLowerCase().contains(value.toLowerCase())) {
-                results.add(job);
+                if (aValue != null && aValue.toLowerCase().contains(value.toLowerCase())) {
+                    results.add(job);
+                }
             }
         }
 

@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -36,6 +37,7 @@ public class SkillController {
             return "skills/add";
         }
         skillRepository.save(newSkill);
+        //List<Skill> selectedSkills = (List<Skill>) skillRepository.findAllById(skills);
 
         return "redirect:skills/..";
     }
@@ -45,7 +47,7 @@ public class SkillController {
 
         Optional<Skill> optSkill = skillRepository.findById(skillId);
         if (optSkill.isPresent()) {
-            Skill skill = (Skill) optSkill.get();
+            Skill skill = optSkill.get();
             model.addAttribute("skill", skill);
             return "skills/view";
         } else {
