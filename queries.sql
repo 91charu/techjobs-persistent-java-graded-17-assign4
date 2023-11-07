@@ -19,7 +19,7 @@ DROP TABLE job;
 --WHERE job.id IS NOT NULL
 --ORDER BY skill.name ASC;
 
-select * from skill
-left join job_skills on job_skills.skills_id = skill.id
-where job_skills.jobs_id is not null
-order by name asc;
+SELECT * FROM skill
+LEFT JOIN job_skills ON job_skills.skills_id = skill.id
+WHERE job_skills.jobs_id IS NOT NULL
+ORDER BY name ASC;
